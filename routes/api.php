@@ -1,12 +1,18 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
-use App\Http\Controllers\API\RegisterController;
-use App\Http\Controllers\API\ProductController;
+use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\ProductController;
 
-    Route::post('register', [RegisterController::class, 'register']);
-    Route::post('login', [LoginController::class,'login']);
+Route::middleware('auth:sactum')->get('/user',function (Request $request){
+    return $request->user();
+});
 
-    Route::middleware('auth:api')->group( function() {
-        Route::resource('products', ProductController::class);
-    });
+Route::post('/register',[AuthenticationController::class,'register']);
+Route::post('/login',[AuthenticationController::class,'login']);
+
+Route::middleware('auth:api')->group(function(){
+    Route::post('/logout',[AuthenticationController::class,'logout']);
+    Route::resource('products',ProductController::class);
+});
