@@ -1,18 +1,22 @@
 <?php
 
 use Illuminate\Http\Request;
-use Illuminate\Routing\Route;
-use App\Http\Controllers\AuthenticationController;
-use App\Http\Controllers\ProductController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\ApiController;
 
-Route::middleware('auth:sactum')->get('/user',function (Request $request){
-    return $request->user();
+//open Routes
+Route::post("register",[ApiController::class, "register"]);
+Route::post("login",[ApiController::class, "register"]);
+
+//protected Routes
+
+Route::group([
+    "middleware" => ["auth:api"]
+], function(){
+    Route::get("profile", [ApiController::class],"profile");
+    Route::get("logout", [ApiController::class],"logout");
 });
 
-Route::post('/register',[AuthenticationController::class,'register']);
-Route::post('/login',[AuthenticationController::class,'login']);
-
-Route::middleware('auth:api')->group(function(){
-    Route::post('/logout',[AuthenticationController::class,'logout']);
-    Route::resource('products',ProductController::class);
-});
+// Route::get('/user', function (Request $request) {
+//     return $request->user();
+// })->middleware('auth:api');
