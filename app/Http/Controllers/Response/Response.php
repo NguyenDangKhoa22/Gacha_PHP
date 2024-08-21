@@ -1,18 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Response;
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class BaseController extends Controller
+class Response extends Controller
 {
-    public function sendResponse($result, $message){
+    public function sendResponse($result,$message){
         $response = [
-            'success' => true,
-            'data' => $result,
-            'message' => $message
+            "success" => true,
+            "data" => $result,
+            "message" => $message,
         ];
-
         return response()->json($response,200);
     }
     public function sendError($error, $errorMessage=[] ,$code = 404){
