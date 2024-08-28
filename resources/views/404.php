@@ -6,6 +6,6 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Hello word</h1>
+    <h1>OPPs! Erorr 404</h1>
 </body>
 </html>
