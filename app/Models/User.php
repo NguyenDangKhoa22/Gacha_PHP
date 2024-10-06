@@ -11,6 +11,9 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable, HasApiTokens;
 
+    protected $table = 'users';
+
+
     /**
      * The attributes that are mass assignable.
      *
@@ -63,5 +66,9 @@ class User extends Authenticatable
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function insertUser($data){
+        return User::create($data);
     }
 }
