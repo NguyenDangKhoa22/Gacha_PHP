@@ -7,44 +7,26 @@ use App\Repositories\UserRepository;
 
 class Register extends Component
 {
-    public $name;
-    public $email;
-    public $password;
-    public $password_confirmation;
-
-    protected $userRepository;
-
+    public $name, $email,$password,$password_confirmation;
+    
     protected $rules = [
         'name' => 'required|string|max:255',
-        'email' => 'required|string|email|max:255|unique:users',
-        'password' => 'required|string|min:8|confirmed',
+        'email' => 'required|email|unique:users,email',
+        'password' => 'required|confirmed|string|min:6',
     ];
-
-    public function __construct(UserRepository $userRepository)
-    {
-        parent::__construct(); // Gọi parent constructor
-        $this->userRepository = $userRepository;
-    }
-
-    public function register()
-    {
+    public function register( UserRepository $userRepository){
         $this->validate();
 
-        $input = [
-            'name' => $this->name,
-            'email' => $this->email,
-            'password' => $this->password
-        ];
+        $userRepository->insertUser([
+            'name' =>$this->name,
+            'email'=>$this->email,
+            'password'=>$this->password,
+        ]);
 
-        // Gọi phương thức addUser từ userRepository
-        $this->userRepository->addUser($input);
-        
-        session()->flash('message', 'User registered successfully.');
+        session()->flash('message', 'User registered successfully!');
 
-        // Reset các trường sau khi tạo người dùng thành công
-        $this->reset(['name', 'email', 'password', 'password_confirmation']);
+        return redirect()->route('home');
     }
-    
     public function render()
     {
         return view('livewire.register');

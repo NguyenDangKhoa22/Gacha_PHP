@@ -11,15 +11,19 @@
         @error('email') <span class="error">{{$message}}</span>@enderror 
     </div> 
     <div>
-        <Label for="password">Password</Label>
+        <label for="password">Password</label>
         <input type="password" id="password" wire:model="password">
-        @error('password') <span class="error">{{$message}}</span>@enderror 
-    </div>  
+        @error('password') <span class="error">{{ $message }}</span> @enderror
+    </div>
+
     <div>
-        <Label for="password_confirmation">Confirm_Password</Label>
+        <label for="password_confirmation">Confirm Password</label>
         <input type="password" id="password_confirmation" wire:model="password_confirmation">
-        @error('password_confirmation') <span class="error">{{$message}}</span>@enderror 
-    </div>   
+        @error('password_confirmation') <span class="error">{{ $message }}</span> @enderror
+    </div>
     
     <button type="submit">Register</button>
+    @if (session()->has('message'))
+        <div>{{ session('message') }}</div>
+    @endif
 </form>
