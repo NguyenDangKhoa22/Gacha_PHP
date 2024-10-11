@@ -5,5 +5,8 @@
         public function insertUser(array $input): User{
             return User::insertUser($input);
         }
+        public function checkUser( $userName,$password): bool{
+            return User::checkUser($userName,$password);
+        }
     }
     

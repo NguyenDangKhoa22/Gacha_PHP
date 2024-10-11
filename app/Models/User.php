@@ -74,5 +74,11 @@ class User extends Authenticatable
         $data['password'] = Hash::make($data['password']);
         return self::create($data);
     }
-
+    public static function checkUser($userName, $password): bool{
+        $user = User::where('name',$userName)->first();
+        if($user && Hash::check($password,$user->password)){
+            return true;
+        }
+        return false;
+    }
 }

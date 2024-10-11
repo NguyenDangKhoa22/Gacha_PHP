@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\User;
+use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 
@@ -14,18 +15,18 @@ class Login extends Component
         'name' => 'required',
         'password' => 'required'
     ];
-    public function login(){
+    public function login(UserRepository $userRepository){
         $this->validate();
-        $user = User::where('name',$this->name)->first();
-        if(!$user){
-            $this->addError('name',"khung");
+        if($userRepository->checkUser($this->name,$this->password) == true){
+            session()->flash('message', 'User login successfull');
+            return redirect()->route('home');
         }
         else{
-            if(Hash::check($this->password,$user->password)){
-                return redirect()->route('404');
-            }
-            $this->addError('password',"dien");
+            session()->flash('message', 'User login fail');
+        return redirect()->route('404');
         }
+        
+
     }
     public function render()
     {
