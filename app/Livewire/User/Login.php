@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\User;
 
 use App\Models\User;
 use App\Repositories\UserRepository;
@@ -30,6 +30,6 @@ class Login extends Component
     }
     public function render()
     {
-        return view('livewire.login');
+        return view('livewire.user.login');
     }
 }

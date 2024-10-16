@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\User;
 
 use Livewire\Component;
 use App\Repositories\UserRepository;
@@ -29,6 +29,6 @@ class Register extends Component
     }
     public function render()
     {
-        return view('livewire.register');
+        return view('livewire.user.register');
     }
 }
