@@ -3,9 +3,9 @@
     use Livewire\Component;
     use App\Repositories\AdminRepository;
     class Login extends Component{
-        private $userName,$password;
+        public $userName,$password;
         public $rules = [
-            'name' => 'required',
+            'userName' => 'required',
             'password'=>'required',
         ];
         public function login(AdminRepository $admin){

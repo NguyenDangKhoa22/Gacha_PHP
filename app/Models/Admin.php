@@ -13,19 +13,24 @@ class Admin extends Authenticatable
     use HasFactory;
     protected $table = 'admins';
 
-    protected $fillable = ['name', 'password'];
+    protected $fillable = ['user', 'password'];
 
     public static function adminLogin($userName,$password):bool{
-        $admin = Admin::where('name',$userName)->first();
-        if($admin && Hash::check($password,$admin->password)){
-            return true;
+        try {
+            $admin = Admin::where('user', $userName)->first();
+            if ($admin && Hash::check($password, $admin->password)) {
+                return true;
+            }else{
+                return false;
+            }
+        } catch (\Exception $e) {
+            return false;
         }
-        return false;
     }
     public static function addAdmin($user, $password): Admin
     {
         return self::create([
-            'user' => $user,  // Đảm bảo rằng bạn đang chèn giá trị cho cột 'user'
+            'user' => $user,  
             'password' => Hash::make($password),
         ]);
     }

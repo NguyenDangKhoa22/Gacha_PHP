@@ -9,9 +9,9 @@
 <body>
     <form wire:submit.prevent="login">
         <div>
-            <Label for="name">Name</Label>
-            <input type="text" id="name" wire:model="name">
-            @error('name') <span class="error">{{$message}}</span>@enderror 
+            <Label for="userName">Name</Label>
+            <input type="text" id="userName" wire:model="userName">
+            @error('userName') <span class="text-danger">{{$message}}</span>@enderror 
         </div>  
         <div>
             <Label for="password">Password</Label>
