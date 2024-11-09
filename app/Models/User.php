@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Passport\HasApiTokens;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable 
 {
@@ -49,16 +50,20 @@ class User extends Authenticatable
         ];
     }
     
-    public static function insertUser(array $data): User
+    public function insertUser(array $data): User
     {
         $data['password'] = Hash::make($data['password']);
         return self::create($data);
     }
-    public static function checkUser($userName, $password): bool{
+    public function checkUser($userName, $password): bool{
         $user = User::where('name',$userName)->first();
         if($user && Hash::check($password,$user->password)){
             return true;
         }
         return false;
+    }
+    public function getListUser(){
+        $user = User::where('deleted_flag', 0)->get()->toArray();
+        return $user;
     }
 }

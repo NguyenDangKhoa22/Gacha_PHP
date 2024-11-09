@@ -3,6 +3,7 @@
     use App\Models\Admin;
     class AdminRepository {
         public function adminLogin($username,$password):bool{
-            return  Admin::adminLogin($username,$password);
+            $obj_admin = new Admin();
+            return $obj_admin->adminLogin($username, $password) ;
         }
     }

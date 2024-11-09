@@ -1,3 +1,4 @@
 <div>
-    <h1>wellcome to home page</h1>
+    <h1>welcome to home page</h1>
+    
 </div>

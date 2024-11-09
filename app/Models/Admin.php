@@ -15,7 +15,7 @@ class Admin extends Authenticatable
 
     protected $fillable = ['user', 'password'];
 
-    public static function adminLogin($userName,$password):bool{
+    public function adminLogin($userName,$password):bool{
         try {
             $admin = Admin::where('user', $userName)->first();
             if ($admin && Hash::check($password, $admin->password)) {
@@ -27,7 +27,7 @@ class Admin extends Authenticatable
             return false;
         }
     }
-    public static function addAdmin($user, $password): Admin
+    public function addAdmin($user, $password): Admin
     {
         return self::create([
             'user' => $user,  

@@ -3,10 +3,16 @@
     use App\Models\User;
     class UserRepository{
         public function insertUser(array $input): User{
-            return User::insertUser($input);
+            $obj_user = new User;
+            return $obj_user->insertUser($input);
         }
         public function checkUser( $userName,$password): bool{
-            return User::checkUser($userName,$password);
+            $obj_user = new User;
+            return $obj_user->checkUser($userName,$password);
+        }
+        public function getUser(){
+            $obj_user = new User;
+            return $obj_user->getListUser();
         }
     }
     
